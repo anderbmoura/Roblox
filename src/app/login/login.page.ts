@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, Platform, ToastController, LoadingController } from '@ionic/angular';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import Parse from 'parse';
 
 @Component({
@@ -8,6 +10,8 @@ import Parse from 'parse';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  authForm: FormGroup;
 
   result: string;
   username: string;
@@ -36,6 +40,11 @@ export class LoginPage implements OnInit {
      }
 
   ngOnInit() {
+
+    this.authForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)])
+    })
 
   }
 

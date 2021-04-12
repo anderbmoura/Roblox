@@ -2,24 +2,28 @@
 
 <ion-content color="dark">
 
+  <form [formGroup]="authForm">
+
     <img  class="login-img" src="../../assets/imgs/logo.png">
     <h3></h3>
 
    
 
         <ion-item color="dark">
-            <ion-label position="floating">Usuário</ion-label>
-          <ion-input [(ngModel)]="username"></ion-input>
+            <ion-label position="floating">E-mail</ion-label>
+          <ion-input formControlName="email"></ion-input>
         </ion-item>
 
         <ion-item color="dark">
             <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password" [(ngModel)]="password"></ion-input>
+          <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
 
      <br>
 
-<ion-button color="success"  expand="full"  (click)="signIn()">ENTRAR</ion-button>
+    </form>
+
+<ion-button color="success"  expand="full"  (click)="signIn()" [disabled]="!authForm.valid">ENTRAR</ion-button>
 <ion-button color="tertiary"    expand="full" (click)="cadastro()">CADASTRE-SE</ion-button>
 <ion-button color="secondary"    expand="full" (click)="recoverPass()">RECUPERAR SENHA</ion-button>
 
