@@ -1,0 +1,138 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
+import { Parse } from 'parse';
+
+@Component({
+  selector: 'app-historico',
+  templateUrl: './historico.page.html',
+  styleUrls: ['./historico.page.scss'],
+})
+export class HistoricoPage implements OnInit {
+
+  public partidasList: any = [];
+
+  public partidaS: any = [];
+
+  public teste = []
+
+  constructor(public httpClient: HttpClient, private http: Http, ) { }
+
+  ngOnInit() {
+
+    this.partidasLOL();
+
+  }
+
+
+  async partidasLOL() {
+
+    const User = new Parse.User();
+    const query = new Parse.Query(User);
+
+    var iduser: String;
+    iduser = Parse.User.current().id;
+
+    const user = await query.get(iduser);
+
+
+      var partidaT = []
+
+      const resC = await this.http.get('http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json');
+
+      const champions = JSON.parse((<any>resC)._body)
+
+      const formed = Object.values(champions.data).reduce((prev, curr) => Object.assign(prev, { [(<any>curr).key]: curr }), {})
+
+      const resM = await this.http.get('https://br1.api.riotgames.com/lol/match/v4/matchlists/by-account/' + user.attributes.accountID + '?api_key=RGAPI-cce96949-629d-4975-adc9-891b7540ae3f');
+      const partidas = JSON.parse((<any>resM)._body);
+
+
+      for (var i = 0; i < 20; i++) {
+
+        partidaT.push({
+          champion: partidas.matches[i].champion,
+          gameId: partidas.matches[i].gameId
+        })
+
+      }
+
+
+      for (var j = 0; j < 20; j++) {
+
+        this.teste.push({
+          name: formed[partidaT[j].champion].name,
+          png: formed[partidaT[j].champion].image.full
+        })
+
+      }
+
+      // subscribe(async (resC) => {
+
+
+      //  .subscribe((resM) => {
+
+
+
+
+
+      console.log(this.teste)
+
+
+
+
+
+
+      //buscando dados de cada partida que o player jogou KDA
+      // for (const id of partidaT) {
+      //   this.http.get('https://br1.api.riotgames.com/lol/match/v4/matches/' + id.gameId + '?api_key=RGAPI-cce96949-629d-4975-adc9-891b7540ae3f').subscribe((infoPartidas) => {
+
+
+
+      //     const t = JSON.parse((<any>infoPartidas)._body)
+
+      //     for (var c = 0; c < 10; c++) {
+      //       if (t.participantIdentities[c].player.accountId == user.attributes.accountID) {
+      //         partidagameId.push({
+      //           participante: t.participantIdentities[c].participantId,
+      //           gameId: t.gameId
+      //         })
+      //       }
+      //     }
+
+
+      //     for (const partId of partidagameId) {
+      //       for (const inf of t.participants) {
+
+      //         if (partId.gameId == t.gameId && partId.participante == inf.participantId) {
+
+      //           this.partidaS.push({
+
+      //             matou: inf.stats.kills,
+      //             morreu: inf.stats.deaths,
+      //             ajudou: inf.stats.assists
+
+
+      //           })
+
+      //           //console.log('Participante: ' + inf.participantId + ' Kills: ' + inf.stats.kills + ' Mortes ' + inf.stats.deaths + ' Assistencias ' + inf.stats.assists)
+      //         }
+      //       }
+      //     }
+
+      //   })
+      // }
+
+
+      // })
+
+
+      // })
+
+
+    // })
+
+
+  }
+
+}

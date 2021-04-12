@@ -1,0 +1,73 @@
+.card_text{
+
+
+  p{
+  
+  font-size: 12px;
+  color: white;
+  
+  }
+}
+
+.avisos{
+  height: auto;
+}
+
+  .texto{
+    font-size: 14px;
+    font-weight: bolder;
+  }
+
+  .card-background-page {
+
+    ion-card {
+      position: relative;
+      text-align: center;
+    }
+  
+    .card-title {
+      position: absolute;
+      top: 40%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .card-title2 {
+      position: absolute;
+      top: 40%;
+      font-size: 1.5em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+    .card-subtitle {
+      font-size: 1.0em;
+      position: absolute;
+      top: 65%;
+      width: 100%;
+      color: #fff;
+    }
+
+    .card-title-steam {
+      position: absolute;
+      top: 40%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bold;
+      color: #000;
+      -webkit-text-stroke-width: 0.8px; /* largura da borda */
+      -webkit-text-stroke-color: #fff; /* cor da borda */
+    }
+  
+    .card-subtitle-steam {
+      font-size: 1.0em;
+      position: absolute;
+      top: 65%;
+      width: 100%;
+      color: #000;
+    }
+  
+  }

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button text="Voltar" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>CADASTRO</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<ion-content color="dark">
+
+  <ion-item color="dark">
+    <ion-label position="floating">Usuário</ion-label>
+    <ion-input [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item color="dark">
+    <ion-label position="floating">E-mail</ion-label>
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+
+  <ion-item color="dark">
+    <ion-label position="floating">Senha</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <!-- 
+      <ion-item color="dark">
+          <ion-label position="floating">Código de indicação (opcional)</ion-label>
+          <ion-input [(ngModel)]="codigo"></ion-input>
+        </ion-item> -->
+  <ion-footer>
+    <ion-toolbar color="dark">
+      <ion-button color="primary" expand="full" size="large" (click)="signUp()">CADASTRAR</ion-button>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-content>

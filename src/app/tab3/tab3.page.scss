@@ -1,0 +1,51 @@
+
+#nomeUser{
+    font-size: 18px;
+    
+}
+
+.invocador{
+    padding-left: 22%;
+}
+
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.fileInput   label {
+    color: #717171;
+    background-color: white;
+    display: inline-block;
+    cursor: pointer;
+    padding: .5em 1em;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.semnada{
+    width: 100%;
+    text-align: center;
+}
+
+label{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+}
+
+#saldoPonto{
+    font-size: 16px;
+    padding-left: 24%;
+}
+
+#pontos{
+    font-size: 16px;
+}
+
+
+#qtdPontos{
+    font-size: 46px;
+}

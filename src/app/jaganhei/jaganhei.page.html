@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Já ganhei algo?
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Voltar" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+  <ion-list-header color="dark">
+    Suas ultimas vitórias
+  </ion-list-header>
+
+
+  <ion-item color="dark" *ngFor="let vencedores of vencedoresInd">
+    <ion-avatar slot="start">
+      <img src="../../assets/imgs/{{vencedores.imagem}}">
+    </ion-avatar>
+    <ion-label class="nomeStyle">
+      <b>{{vencedores.jogo}}</b> - {{vencedores.nome}}
+      <br>
+    </ion-label>
+    <ion-label id="dataGanhou">
+      {{vencedores.dataDia}}/{{vencedores.dataMes}}/{{vencedores.dataAno}}
+    </ion-label>
+  </ion-item>
+</ion-content>

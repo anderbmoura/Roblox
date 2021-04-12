@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "285973272671",
+    "firebase_url": "https://skins-235bc.firebaseio.com",
+    "project_id": "skins-235bc",
+    "storage_bucket": "skins-235bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285973272671:android:105d24a7df25ea17",
+        "android_client_info": {
+          "package_name": "com.skins.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285973272671-3n5qk69rioc8p0kif5hs3c5siule5mb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeTd32hVsyO66uEG46-sBqQZkw2SbIeEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285973272671-3n5qk69rioc8p0kif5hs3c5siule5mb8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

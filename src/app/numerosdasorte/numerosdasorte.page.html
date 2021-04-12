@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Sua sorte
+    </ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button text="Voltar" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+  <div text-center>
+    <label>SORTE DA SEMANA</label>
+  </div>
+
+<ion-grid>
+<ion-row align-items-center>
+  <ion-col *ngFor="let numSorte of numSorte" size="3">
+    <ion-chip  color="light">
+      <ion-label >{{numSorte.bilheteSorte}}</ion-label>
+    </ion-chip>
+  </ion-col>
+</ion-row>
+</ion-grid>
+
+</ion-content>

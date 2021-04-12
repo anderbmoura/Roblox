@@ -1,0 +1,20 @@
+{
+  "items": [
+      {
+          "name": "1º Temporada",
+          "children": [
+              {
+                  "name": "Episódio 1",
+                  "information": "O Prologo do céu",
+                  "link": "https://www.blogger.com/video-play.mp4?contentId=5c4ca4675bfe178a"
+              },
+              {
+                  "name": "Episódio 2",
+                  "information": "O Teste do Aplicativo.",
+                  "link": "https://www.blogger.com/video-play.mp4?contentId=5b8e6bd3906a7904"
+              }
+          ]
+      }
+
+  ]
+}

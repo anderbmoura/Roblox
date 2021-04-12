@@ -1,0 +1,26 @@
+ion-content{
+    --background: url('../../assets/imgs/backgrond-lol2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    width: auto;
+    height: auto;
+}
+
+ion-card {
+    background:rgba(000,000,000,0.7);
+}
+
+.list .item, .list .item-complex .item-content {
+    background: rgba(255,255,255,0);
+  }
+  .item .item-content.activated {
+    background-color: purple !important;
+  }
+
+p{
+    color: #ffffff;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+ion-label{
+  padding-left: 10px;
+}

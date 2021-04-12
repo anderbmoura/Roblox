@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css">
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/ui-lightness/jquery-ui.css">
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Central de trocas
+    </ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button text="Voltar" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+    <div text-center>
+
+        <h4>Disponíveis para troca</h4>
+        <div text-center>
+          <ion-label class="animated pulse" id="qtdPontos"></ion-label>
+      </div>
+    
+      </div>
+
+      <ion-list>
+          <ion-list-header color="dark">
+            Trocas League of Legends
+          </ion-list-header>
+
+          <ion-item color="dark"> 
+            <ion-icon name="gift" slot="start"></ion-icon>
+              Baú misterioso
+              <div slot="end">
+                <ion-label class="animated pulse" id="BAURP" (click)="Trocapts()"></ion-label>
+             </div>
+        </ion-item>
+
+        <ion-item color="dark"> 
+          <ion-icon name="gift" slot="start"></ion-icon>
+            650 RP
+            <div slot="end">
+              <ion-label class="animated pulse" id="650RP" (click)="Trocapts()"></ion-label>
+           </div>
+        </ion-item>
+
+        <ion-item color="dark"> 
+            <ion-icon name="gift" slot="start"></ion-icon>
+              1380 RP
+              <div slot="end">
+                <ion-label class="animated pulse" id="1380RP" (click)="Trocapts()"></ion-label>
+             </div>
+        </ion-item>
+
+        </ion-list>
+
+        <ion-list>
+            <ion-list-header color="dark">
+              Trocas Steam
+            </ion-list-header>
+  
+        <ion-item color="dark"> 
+            <ion-icon name="gift" slot="start"></ion-icon>
+              GIFT 10 REAIS
+              <div slot="end">
+                <ion-label class="animated pulse" id="10REAIS" (click)="Trocapts()"></ion-label>
+             </div>
+          </ion-item>
+
+          <ion-item color="dark"> 
+            <ion-icon name="gift" slot="start"></ion-icon>
+              GIFT 20 REAIS
+              <div slot="end">
+                <ion-label class="animated pulse" id="20REAIS" (click)="Trocapts()"></ion-label>
+             </div>
+          </ion-item>
+          
+  
+          </ion-list>
+
+<!-- 
+          <div class="sc__wrapper">
+            <div id="js--sc--container"></div>
+          </div> -->
+
+</ion-content>

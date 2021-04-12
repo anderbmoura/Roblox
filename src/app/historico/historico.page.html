@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Ultimas partidas
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Voltar" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+  <br color="dark">
+
+  <ion-list-header color="dark">
+    Suas ultimas 10 partidas no LOL
+  </ion-list-header>
+
+  <ion-list>
+    <ion-item color="dark" *ngFor="let par of partidaS">
+      <ion-thumbnail slot="start">
+        <img id="avatarListWins" src="../../assets/champion/{{par.png}}">
+      </ion-thumbnail>
+      <ion-label class="nomeStyle">
+        {{par.name}}
+        <br>
+      </ion-label>
+      <ion-chip color="success">
+        <ion-label>K: {{par.matou}}</ion-label>
+      </ion-chip>
+      <ion-chip color="danger">
+        <ion-note>D: {{par.morreu}}</ion-note>
+      </ion-chip>
+      <ion-chip color="warning">
+        <ion-note>A: {{par.ajudou}}</ion-note>
+      </ion-chip>
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Raspadinha
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Voltar" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center color="dark">
+  <div class="sc__wrapper">
+    <div id="js--sc--container"></div>
+  </div>
+  <ion-button color="primary" [disabled]="disabled" (click)="resetaCard()">Raspar Novamente</ion-button>
+  <!-- <ion-button color="success" [disabled]="disabled" icon-start (click)="chanceExtra()">
+    <ion-icon name="videocam"></ion-icon>
+  <ion-label>Ganhar chance extra</ion-label>
+</ion-button> -->
+  <ion-item-divider color="dark">
+
+    <ion-label>
+      Troca de Premios
+    </ion-label>
+
+  </ion-item-divider>
+
+  <ion-item (click)="trocaPremioBau()" color="dark">
+    <ion-thumbnail slot="start">
+      <img src="../../assets/images/baus-league-of-legends.png">
+    </ion-thumbnail>
+    <ion-label><img src="../../assets/images/rp.png" width="20px" height="20px" />: 2000 (baú misterioso) </ion-label>
+  </ion-item>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-title>
+      <div class="ion-text-center">
+        <ion-label id="qtdPontos"></ion-label>
+      </div>
+
+      <div class="ion-text-center">
+        <img src="../../assets/images/rp.png" width="20px" height="20px" />
+        <ion-label id="qtdRp"></ion-label>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

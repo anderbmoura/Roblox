@@ -1,0 +1,13 @@
+{
+  "name": "Skin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/tab1",
+      "proxyUrl": "https://br1.api.riotgames.com/"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "name": "Skin",
+  "version": "0.0.1",
+  "author": "Ionic Framework",
+  "homepage": "https://ionicframework.com/",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^7.2.16",
+    "@angular/core": "^7.2.16",
+    "@angular/forms": "^7.2.16",
+    "@angular/http": "^7.2.16",
+    "@angular/platform-browser": "^7.2.16",
+    "@angular/platform-browser-dynamic": "^7.2.16",
+    "@angular/pwa": "^0.12.4",
+    "@angular/router": "^7.2.16",
+    "@angular/service-worker": "^7.2.16",
+    "@ionic-native/admob-free": "^5.31.1",
+    "@ionic-native/android-permissions": "^5.31.1",
+    "@ionic-native/core": "^5.31.1",
+    "@ionic-native/device": "^5.31.1",
+    "@ionic-native/email-composer": "^5.31.1",
+    "@ionic-native/facebook": "^5.31.1",
+    "@ionic-native/google-analytics": "^5.31.1",
+    "@ionic-native/http": "^5.31.1",
+    "@ionic-native/in-app-browser": "^5.31.1",
+    "@ionic-native/onesignal": "^5.31.1",
+    "@ionic-native/social-sharing": "^5.31.1",
+    "@ionic-native/splash-screen": "^5.31.1",
+    "@ionic-native/status-bar": "^5.31.1",
+    "@ionic-native/uid": "^5.31.1",
+    "@ionic-native/unique-device-id": "^4.20.0",
+    "@ionic/angular": "^4.11.13",
+    "@ionic/storage": "^2.2.0",
+    "@sweetalert2/ngx-sweetalert2": "^7.3.0",
+    "axios": "^0.19.2",
+    "cordova-admob-sdk": "^0.24.1",
+    "cordova-android": "9.0.0",
+    "cordova-plugin-admob-free": "^0.27.0",
+    "cordova-plugin-advanced-http": "2.4.0",
+    "cordova-plugin-email-composer": "^0.9.2",
+    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-google-analytics": "1.9.0",
+    "cordova-plugin-inappbrowser": "4.1.0",
+    "cordova-plugin-ionic-webview": "4.1.3",
+    "cordova-plugin-splashscreen": "5.0.3",
+    "cordova-plugin-uid": "1.3.0",
+    "cordova-promise-polyfill": "0.0.2",
+    "core-js": "^2.6.12",
+    "es6-promise-plugin": "4.2.2",
+    "ionic": "^4.12.0",
+    "ionic-cache": "^4.1.0",
+    "ionic2-calendar": "^0.5.10",
+    "lodash": "^4.17.21",
+    "node-sass": "^4.14.1",
+    "number-flip": "^1.1.10",
+    "parse": "^2.19.0",
+    "platform": "1.3.5",
+    "rxjs": "^6.6.3",
+    "scratchcard-js": "^1.4.10",
+    "sweetalert2": "^9.17.2",
+    "tslib": "^1.14.1",
+    "zone.js": "~0.8.29"
+  },
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.13.10",
+    "@angular-devkit/build-angular": "^0.13.10",
+    "@angular-devkit/core": "^7.3.10",
+    "@angular-devkit/schematics": "^7.3.10",
+    "@angular/cli": "^7.3.10",
+    "@angular/compiler": "^7.2.16",
+    "@angular/compiler-cli": "^7.2.16",
+    "@angular/language-service": "^7.2.16",
+    "@ionic/angular-toolkit": "~1.5.1",
+    "@types/axios": "^0.14.0",
+    "@types/jasmine": "^2.8.17",
+    "@types/jasminewd2": "^2.0.8",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^12.20.4",
+    "codelyzer": "~4.5.0",
+    "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
+    "cordova-plugin-statusbar": "^2.4.3",
+    "cordova-plugin-whitelist": "^1.3.4",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~4.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "^5.4.4",
+    "ts-node": "~8.3.0",
+    "tslint": "~5.17.0",
+    "typescript": "^3.1.8"
+  },
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-7259395558880037/1639120852"
+      },
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-email-composer": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
+      "cordova-plugin-advanced-http": {
+        "OKHTTP_VERSION": "3.10.0"
+      },
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      },
+      "cordova-plugin-facebook4": {
+        "APP_ID": "924934301203100",
+        "APP_NAME": "Skins",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.2.0"
+      },
+      "onesignal-cordova-plugin": {},
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-google-analytics": {
+        "GMS_VERSION": "11.0.1"
+      },
+      "cordova-plugin-inappbrowser": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}

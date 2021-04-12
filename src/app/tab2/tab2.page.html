@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Ultimos vencedores
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark">
+
+  <br>
+  <br>
+
+  <ion-list-header color="dark">
+    Ultimos vencedores LoL
+  </ion-list-header>
+
+
+  <ion-item color="dark" *ngFor="let vencedores of vencedoresList">
+    <ion-avatar slot="start">
+      <img id="avatarListWins" src="../../assets/imgs/medalha.png">
+    </ion-avatar>
+    <ion-label class="nomeStyle">
+      <b>{{vencedores.nomeLOL}}</b>
+      <p>{{vencedores.premio}}</p>
+      <br>
+    </ion-label>
+    <ion-chip slot="end" color="{{vencedores.color}}">
+      <ion-label>
+        {{vencedores.status}}
+      </ion-label>
+    </ion-chip>
+  </ion-item>
+
+
+  <!-- <br><br><br>
+  <ion-list-header color="dark">
+    Ultimos vencedores STEAM
+  </ion-list-header>
+
+
+<ion-item color="dark" *ngFor="let vencedores of vencedoresListCS">
+  <ion-avatar slot="start">
+    <img id="avatarListWins" src="../../assets/imgs/pistola.png">
+  </ion-avatar>
+  <ion-label class="nomeStyle">
+    <b>{{vencedores.nomeCS}}</b>
+    <br>
+  </ion-label>
+</ion-item> -->
+
+
+</ion-content>

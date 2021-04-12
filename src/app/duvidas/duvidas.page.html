@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar>
+      <ion-buttons slot="primary">
+        <ion-button (click)="dismiss()">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+        </ion-buttons>
+
+    <ion-title>Duvidas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card color="light" (click)="expandItem(item)" *ngFor="let item of items">
+        <ion-card-header>
+          <ion-card-title>{{item.title}}</ion-card-title>
+        </ion-card-header>
+    
+        <ion-card-content>
+          <app-expandable expandHeight="250px" [expanded]="item.expanded">
+            <p>
+              {{item.response}}
+            </p>
+          </app-expandable>
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>

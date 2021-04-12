@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Sua área
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+  <ion-item color="dark">
+
+    <ion-thumbnail slot="start">
+        <input (change)="avatarSend()"
+        type="file"
+        id="avatarImg" name="avatarImg"
+        class="fileInput"
+        accept="image/png"/>
+        <label for="avatarImg"><img id="avatarImgg" src=""></label>
+    </ion-thumbnail>
+
+    <ion-label id="nomeUser" class="nomeStyle"></ion-label>
+    <ion-button (click)="updateInvocator()" fill="clear" color="light">Alterar</ion-button>
+  </ion-item>
+
+  
+<!-- 
+    <label id="saldoPonto">Saldo de pontos: <label id="pontos"></label></label> -->
+  
+
+
+
+<br>
+<br>
+<br>
+ 
+      <ion-item (click)="jaGanheiPage()" color="dark"> 
+          <ion-icon name="star-half" slot="start"></ion-icon>
+            Já ganhei algo?
+        </ion-item>
+        
+        <!-- <ion-item (click)="addTradeLink()" color="dark"> 
+          <ion-icon name="swap" slot="start"></ion-icon>
+          <div class="iconetrade" slot="end"></div>
+            Perfil steam link
+        </ion-item> -->
+      
+        <!-- <ion-item color="dark"> 
+          <ion-icon name="gift" slot="start"></ion-icon>
+            Troca de pontos
+        </ion-item> -->
+        <!-- <ion-item (click)="trocaPontos()" color="dark">
+          <ion-icon name="md-basket" slot="start"></ion-icon>
+          Central de trocas
+      </ion-item> -->
+      <!-- <ion-item (click)="roleta()" color="dark">
+        <ion-icon name="md-basket" slot="start"></ion-icon>
+        Roleta
+    </ion-item> -->
+      <!-- <ion-item (click)="trocaPontos()" color="dark">
+        <ion-icon name="laptop" slot="start"></ion-icon>
+        Partida atual (In-Game)
+    </ion-item> -->
+    <ion-item (click)="historico()" color="dark">
+      <ion-icon name="list" slot="start"></ion-icon>
+      Histórico de partidas
+  </ion-item>
+  <ion-item (click)="vencedores()" color="dark">
+    <ion-icon name="md-ribbon" slot="start"></ion-icon>
+    Últimos Vencedores
+</ion-item>
+        <ion-item (click)="presentModal()" color="dark">
+            <ion-icon name="chatboxes" slot="start"></ion-icon>
+            Duvidas
+        </ion-item>
+
+  <br>
+
+
+<!-- <br>
+  <div class="ion-text-center">
+
+    <ion-label>PONTOS DE PARTICIPAÇÃO</ion-label>
+
+  </div> -->
+<!-- 
+  <div>
+    <br>
+  </div>
+
+  <div class="ion-text-center">
+      <ion-label class="animated pulse" id="qtdPontos"></ion-label>
+  </div> -->
+
+    <ion-button class="button-bot" expand="full" color="danger" (click)="logOut()">
+        SAIR
+      </ion-button>
+
+</ion-content>
