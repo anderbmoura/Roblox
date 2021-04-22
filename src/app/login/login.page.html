@@ -9,23 +9,23 @@
 
    
 
-        <ion-item color="dark">
-            <ion-label position="floating">E-mail</ion-label>
-          <ion-input formControlName="email"></ion-input>
+        <ion-item color="dark" class="login-spacement" no-lines>
+            <ion-icon name="mail"></ion-icon>
+          <ion-input formControlName="email" type="email" placeholder="E-mail" transparent></ion-input>
         </ion-item>
 
         <ion-item color="dark">
-            <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
+            <ion-icon name="lock"></ion-icon>
+          <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
         </ion-item>
 
      <br>
 
     </form>
 
-<ion-button color="success"  expand="full"  (click)="signIn()" [disabled]="!authForm.valid">ENTRAR</ion-button>
-<ion-button color="tertiary"    expand="full" (click)="cadastro()">CADASTRE-SE</ion-button>
-<ion-button color="secondary"    expand="full" (click)="recoverPass()">RECUPERAR SENHA</ion-button>
+<ion-button color="success"   (click)="signIn()" [disabled]="!authForm.valid">ENTRAR</ion-button>
+<ion-button color="tertiary"  (click)="cadastro()">CADASTRE-SE</ion-button>
+<ion-button color="secondary" (click)="recoverPass()">RECUPERAR SENHA</ion-button>
 
 
 </ion-content>

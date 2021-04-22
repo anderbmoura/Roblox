@@ -6,7 +6,13 @@ import {
   AdMobFreeRewardVideoConfig
 } from '@ionic-native/admob-free/ngx';
 import { Platform, ToastController, AlertController } from '@ionic/angular';
-import { Parse } from 'parse';
+
+//firebase import
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import 'firebase/database';
+import { random } from "lodash";
 
 
 @Injectable()
@@ -19,16 +25,16 @@ export class AdmobFreeService implements OnInit {
   interstitialConfig: AdMobFreeInterstitialConfig = {
     // add your config here
     // for the sake of this example we will just use the test config
-    isTesting: false,
-    autoShow: false,
-    id: "ca-app-pub-4960570157635148/2539580422"
+    isTesting: true,
+    autoShow: false
+   // id: "ca-app-pub-4960570157635148/2539580422"
   };
 
   //Reward Video Ad's Configurations
   RewardVideoConfig: AdMobFreeRewardVideoConfig = {
-    isTesting: false, // Remove in production
-    autoShow: false,//
-    id: "ca-app-pub-4960570157635148/2568229534"
+    isTesting: true, // Remove in production
+    autoShow: false//
+    //id: "ca-app-pub-4960570157635148/2568229534"
   };
 
   invocador: String;
@@ -76,66 +82,62 @@ export class AdmobFreeService implements OnInit {
     this.admobFree.on('admob.rewardvideo.events.CLOSE').subscribe(async () => {
 
       const toast = await this.toastCtrl.create({
-        message: "Boa sorte, você esta participando deste sorteio. Você ganhou pontos de raspadinha.",
+        message: "Boa sorte, você esta participando deste sorteio.",
         duration: 5000
       });
 
-      if(this.counter === 10) {
-        console.log("Anuncio Visualizado 10 segundos!")
-    } else {
-      console.log("anuncio fechado antes!")
-    }
 
       this.admobFree.rewardVideo.prepare()
         .then(async () => {
 
-          var iduser: String;
-          iduser = Parse.User.current().id;
+          let nomeRoblox
 
           var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-          var string_length = 6;
+          var string_length = 10;
           var randomstring = '';
           for (var i = 0; i < string_length; i++) {
             var rnum = Math.floor(Math.random() * chars.length);
             randomstring += chars.substring(rnum, rnum + 1);
           }
-          // var Pontos = Math.round(5 + Math.random()*7);
+          
 
-          const participate = Parse.Object.extend('participate');
-          const myNewObject = new participate();
+          firebase.auth().onAuthStateChanged(function(user) {
 
-          const User = new Parse.User();
-          const query = new Parse.Query(User);
+            if (user) {
 
-          query.get(iduser).then((user) => {
+              var username = firebase.database().ref('/users/' + user.uid)
 
-            myNewObject.set('nome', user.attributes.invocador);
-            myNewObject.set('game', this.jogoPar);
-            myNewObject.set('iduser', iduser);
-            myNewObject.set('participando', 1);
-            myNewObject.set('bilheteSorte', randomstring.toUpperCase());
-            myNewObject.set('tipo', this.tipo);
+              username.on('value', (snapshot) =>{
 
-            myNewObject.save();
-            toast.present();
+                console.log(user)
 
-          })
+                var seconds = new Date()
+                var data = new Date()
+                var dia = data.getDate()
+                var mes = data.getMonth()
 
+                firebase.database().ref('/participate/'+randomstring+user.uid).set({
+                  game: 'roblox',
+                  participateTime: ((seconds.getHours()*3600000)+3600000)+(seconds.getMinutes()*60000),
+                  robloxName: snapshot.val().robloxName,
+                  date: dia+'/'+mes,
+                  type: 1,
+                  uid: user.uid
+                })
 
-          query.get(iduser).then((user) => {
-            if (user.attributes.pontos == undefined) {
-              pontos = 0
+                firebase.database().ref('/participateTime/'+user.uid).set({
+                  participateTime: ((seconds.getHours()*3600000)+3600000)+(seconds.getMinutes()*60000),
+                  id: user.uid
+                })
+
+                toast.present()
+                
+              })
+
             } else {
-              var pontos = user.attributes.pontos;
+              // No user is signed in.
             }
-            user.set('pontos', pontos + Math.round(5 + Math.random() * 5));
-            user.save().then((response) => {
-
-            }).catch((error) => {
-
-            });
           });
-
         }).catch(e => alert(e));
     });
   }
@@ -175,21 +177,12 @@ export class AdmobFreeService implements OnInit {
   }
 
   RewardVideoAd() {
-    this.counter = 0
     setInterval(function(){
-          
-      // do your thing
-  
-      this.counter++;
-      console.log(this.counter);
   }, 1000);
     //Check if Ad is loaded
     this.admobFree.rewardVideo.isReady().then(() => {
       //Will show prepared Ad
       this.admobFree.rewardVideo.show().then(() => {
-
-
-
       })
         .catch(e => alert("show " + e));
     })

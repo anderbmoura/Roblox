@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CacheModule } from 'ionic-cache';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -36,7 +36,6 @@ import { environment } from '../environments/environment';
     StatusBar,
     SplashScreen,
     InAppBrowser,
-    GoogleAnalytics,
     AdMobFree,
     AdmobFreeService,
     SocialSharing,

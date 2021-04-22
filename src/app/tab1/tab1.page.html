@@ -1,38 +1,17 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>
-      PARTICIPAR
+    <ion-title align="center">
+      Sorteios Disponiveis
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark" class="card-background-page">
 
-  <ion-chip class="avisos" color="success">
-    <ion-label>Atenção para as novas atualizações. Como a RIOT não arrumou o sistema de presentes dentro do jogo, iremos alterar os sorteios e os prêmios. Todos os usuários que já haviam ganhado os baús misteriosos em sorteios ou raspadinha irão receber 650RP, por voucher ou diretamente dentro do jogo como forma de presente. Demais usuários que ganharam skins irão receber o valor equivalente em RP também por voucher ou diretamente dentro do jogo. Por favor, peço a todos que adicionem o usuário <b>BlasterYA</b>   dentro do jogo e chamem no chat para começarmos o processo de envio. Obrigado</ion-label>
-  </ion-chip>
-
-  <ion-card (click)="goLeague()">
-    <img src="https://dotesports-media.nyc3.cdn.digitaloceanspaces.com/wp-content/uploads/sites/3/2018/08/09111008/c5a1382f-d3c2-4b51-96b3-cc956b1bf06e-770x454.jpg"/>
-    <div class="card-title">League Of Legends</div>
-    <div class="card-subtitle">PARTICIPAR AGORA!</div>
+  <ion-card (click)="goLeague()" *ngFor="let dados of cardLOL">
+    <img src="{{dados.background}}"/>
+    <div class="card-title">{{dados.Title}}</div>
+    <div class="card-subtitle">{{dados.SubTitle}}</div>
   </ion-card>
-
-
-
-  <!-- <ion-card (click)="goCS()">
-    <img src="../../assets/imgs/steam.jpg"/>
-    <div class="card-title-steam">STEAM CARDS</div>
-    <div class="card-subtitle-steam" id="npartcs"></div>
-  </ion-card> -->
-
-<ion-card>
-  <img src="../../assets/images/progresso_sorteios.jpg"/>
-  <div class="card-title2">2 Sorteios por semana?</div>
-  <div class="card-subtitle">Ajude na divulgação do app, quanto mais usuários mais sorteios semanais serão feitos.</div>
-<ion-progress-bar [value]="progress" [buffer]="buffer"></ion-progress-bar>
-</ion-card>
-
-<ion-button expand="full" (click)="openWebpage('https://discord.gg/9yMFFayn')">Entre no nosso Discord</ion-button>
 
 </ion-content>

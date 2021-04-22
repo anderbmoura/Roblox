@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.skinsapp.news" version="1.4.27" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.roblox.forever" version="1.4.27" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Skins</name>
-    <description>Sorteio de skins para jogos.</description>
+    <description>Sorteio de robux.</description>
     <author email="lbmoura1998@gmail.com" href="">Leonardo Moura</author>
     <content src="index.html" />
     <access origin="*" />

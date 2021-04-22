@@ -4,14 +4,40 @@ page-login {
 }
 
 ion-button{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  display: block;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-top: 20px;
+  text-transform: none;
+  --border-radius: 20px;
+  font-size: 15px;
+  height: 30px;
+
 }
 
 img{
-
-  
-  height: 45vh;
+  height: 25vh;
   width: auto;
   margin: auto;
   display: block;
+  padding-top: 25px;
   }
+
+  form{
+    
+    ion-item {
+      align-content: center;
+      padding-top: 10px;
+      --border-radius:10px;
+      --background: var( --ion-color-primary);
+      --color:#fff;
+      width: 100%;
+  }
+  }
+
+  ion-icon {
+    padding-right: 15px;
+    --color: var( --ion-color-primary-contrast);
+}
+
+
+

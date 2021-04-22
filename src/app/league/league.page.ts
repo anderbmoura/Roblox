@@ -4,12 +4,23 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ToastController, NavController } from '@ionic/angular';
 
+
+//firebase SDK import
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import 'firebase/database';
+
 @Component({
   selector: 'app-league',
   templateUrl: './league.page.html',
   styleUrls: ['./league.page.scss'],
 })
 export class LeaguePage implements OnInit {
+
+
+  public participateCard = [];
 
   url = 'https://play.google.com/store/apps/details?id=com.skinsapp.news';
 
@@ -26,6 +37,17 @@ export class LeaguePage implements OnInit {
 
   ngOnInit() {
 
+    var ref = firebase.database().ref('/mountParticipateCard')
+
+    ref.once('value').then(async snapshot =>{
+       snapshot.forEach(value => {
+       this.participateCard.push(
+         value.val()
+         
+         )
+      })
+    })
+
   }
 
   ionViewDidEnter() {
@@ -34,15 +56,18 @@ export class LeaguePage implements OnInit {
     }, false);
 }
 
+
   ionViewWillEnter() {
     this.admobFreeService.BannerAd();
     //this.badgePartipou();
     //this.badgePartipouSkinLol();
   }
 
+
   ionViewWillLeave() {
     this.admobFreeService.hideBannerAd();
   }
+
 
   badgePartipou() {
 
@@ -199,70 +224,51 @@ export class LeaguePage implements OnInit {
 
     const opsParticipou = await this.alertController.create({
       header: 'ATENÇÃO',
-      message: 'Ops! Você já participou hoje, volte amanhã :)',
+      message: 'Ops! Você já participou nesta hora. Volte daqui 1 hora.',
       buttons: ['Ok']
     });
 
+            
+        this.showRewardVideo()
+        this.passaParamentro('LOL', '1');
 
-    aguarde.present();
+    firebase.auth().onAuthStateChanged(function(user) {
 
-    var dataPart;
+      if (user) {
 
-    var today = new Date();
-    var todayInt;
-    todayInt = today.getDate();
-    var idd: String;
-    idd = Parse.User.current().id;
+        var seconds = new Date()
 
+        var username = firebase.database().ref('/participateTime/'+user.uid)
+        username.once('value', (snapshot) =>{
 
+          console.log(snapshot.val().participateTime - ((seconds.getHours()*3600000) + (seconds.getMinutes()*60000)))
 
-    const participate = Parse.Object.extend('participate');
-    const query = new Parse.Query(participate);
-    query.equalTo("iduser", idd);
-    query.equalTo("game", 'LOL');
-    query.equalTo("tipo", '1');
-    query.descending("createdAt");
-    query.limit(1);
-    query.find().then((results) => {
-      query.count().then(count => {
+          if(snapshot.val().participateTime - ((seconds.getHours()*3600000) + (seconds.getMinutes()*60000)) > 1){
 
-        var participando;
-        var game;
+                  aguarde.dismiss()
+                  opsParticipou.present()
 
+          } else {
 
-        if (count == 0) {
-          console.log("novo usuário");
-        } else {
-          dataPart = results[0].createdAt.getDate();
-          participando = results[0].attributes.participando;
-          game = results[0].attributes.game;
+            console.log("Opa veio aqui")
+                  
+        aguarde.dismiss()
+        this.showRewardVideo()
+        this.passaParamentro('LOL', '1')
+
+          }
+
         }
+      )} else {
 
 
 
-        if (count == 1) {
-          participando = 0;
-        }
+      }
+    })
 
-
-
-        if (participando == 1) {
-          aguarde.dismiss();
-          opsParticipou.present()
-        } else {
-
-
-          aguarde.dismiss();
-          this.showRewardVideo()
-          this.passaParamentro('LOL', '1');
-        }
-
-      }, (error) => {
-        console.log("erro desconhecido.")
-
-      });
-
-    });
+    // aguarde.dismiss();
+    // this.showRewardVideo()
+    // this.passaParamentro('LOL', '1');
 
   }
 

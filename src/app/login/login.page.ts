@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, Platform, ToastController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import Parse from 'parse';
+
+
+//import SDK firebase
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import 'firebase/database';
 
 @Component({
   selector: 'app-login',
@@ -19,32 +25,35 @@ export class LoginPage implements OnInit {
   email: string;
   isSigningup: boolean;
 
-  constructor(private navCtrl: NavController, 
+  constructor(
+    private navCtrl: NavController, 
     public platform: Platform, public toastCtrl: ToastController, public alertCtrl: AlertController,
-    public loadingCtrl : LoadingController) {
-
-  let install = new Parse.Installation();
-  install.set("deviceType", this.platform.platforms().toString());
-
-  install.save(null, {
-    success: (install) => {
-      // Execute any logic that should take place after the object is saved.
-      this.result = 'New object created with objectId: ' + install.id;
-    },
-    error: (install, error) => {
-      // Execute any logic that should take place if the save fails.
-      // error is a Parse.Error with an error code and message.
-      this.result = ('Failed to create new object, with error code:' + error.message.toString());
-    }
-  });
+    public loadingCtrl : LoadingController
+    ) {
      }
+
 
   ngOnInit() {
 
+    firebase.analytics().logEvent('Tela Login');
+    
     this.authForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)])
     })
+
+    // firebase.auth().onAuthStateChanged(function(user) {
+
+    //   if (user) {
+
+    //     this.navCtrl.navigateRoot('/');  
+
+    //   } else {
+
+    //     console.log("Não esta logado")
+
+    //   }
+    // });
 
   }
 
@@ -56,6 +65,8 @@ export class LoginPage implements OnInit {
 
   async recoverPass(){
 
+
+
     const aguardeRecover = await this.loadingCtrl.create({
       spinner: "dots"
     });
@@ -63,6 +74,12 @@ export class LoginPage implements OnInit {
     const redefinirOK = await this.alertCtrl.create({
       header: 'E-mail enviado.',
       message: 'Agora é só verificar sua caixa de entrada.',
+      buttons: ['Ok']
+    });
+
+    const invalidMail = await this.alertCtrl.create({
+      header: 'Verifique o e-mail.',
+      message: 'E-mail não encontrado ou inexistente. Por favor, verifique e tente novamente.',
       buttons: ['Ok']
     });
 
@@ -74,6 +91,7 @@ export class LoginPage implements OnInit {
    
 
       const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
       header: 'Recuperação de senha',
       subHeader: 'Digite seu endereço de e-mail para recuperar sua senha.',
       inputs: [
@@ -96,23 +114,26 @@ export class LoginPage implements OnInit {
           handler : async (passData) => {
 
             await aguardeRecover.present();
+
+
             
-            Parse.User.requestPasswordReset(passData.pass).then(async function() {
+    firebase.auth().sendPasswordResetEmail(passData.pass).then(async function() {
 
-              await redefinirOK.present();
-              await aguardeRecover.dismiss();
+      await redefinirOK.present();
+      await aguardeRecover.dismiss();
+      
+    }).catch(async function(error) {
 
-            }).catch(async function(error) {
+      var erro: String = error.code
 
-              var erro: String = error.code
+      if(error.message = "The email address is badly formatted."){
+        await invalidMail.present()
+      }
 
-                aguardeRecover.dismiss();
-                campoVazio.present();
-
-
-              
-            });
-
+        aguardeRecover.dismiss();
+      
+    });
+            
           }
         }
       ]
@@ -124,6 +145,7 @@ export class LoginPage implements OnInit {
 
   async signIn() {
 
+
     const aguarde = await this.loadingCtrl.create({
       spinner: "dots",
       message: "Entrando..."
@@ -131,60 +153,29 @@ export class LoginPage implements OnInit {
 
     await aguarde.present();
 
-    Parse.User.logIn(this.username, this.password).then(async (user) => {
+ 
+    firebase.auth().signInWithEmailAndPassword(this.authForm.get('email').value, this.authForm.get('password').value)
+  .then((userCredential) => {
 
-      if(user.get('emailVerified')) {
+    aguarde.dismiss();   
+    this.navCtrl.navigateRoot('/');
+   
+  })
+  .catch(async (error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
 
-        var verificaID: String;
-        verificaID = Parse.User.current().id;
-    
-        const slides = Parse.Object.extend('slides');
-        const query = new Parse.Query(slides);
-        query.equalTo("iduser", verificaID);
-        query.find().then((results) => {
-    
-          if(typeof document !== 'undefined'){
-            aguarde.dismiss();
-            this.navCtrl.navigateRoot('/slides');
-          }
+    aguarde.dismiss();
+    console.log('Error logging in', errorCode);
 
-          if(results[0].attributes.iduser == Parse.User.current().id){
-            aguarde.dismiss();    
-            this.navCtrl.navigateRoot('/');
-          }  
-          
-            console.log(results);
-            }, (error) => {
-              console.log("ERRO");
-            });
-
-        
-      } else {
-        await aguarde.dismiss();
-        Parse.User.logOut().then((resp) => {
-          console.log('Logged out successfully', resp);
-        }, err => {
-          console.log('Error logging out', err);
-        });
-
-        const alert = await this.alertCtrl.create({
-          header: 'Atenção',
-          message: 'Você precisa verificar seu e-mail.',
-          buttons: ['Ok']
-        });
-        await alert.present();
-      }
-    }, async err => {
-      aguarde.dismiss();
-      console.log('Error logging in', err.code);
-
-      const toast = await this.toastCtrl.create({
-        message: 'Login/senha inválidos.',
-        duration: 2000
-      });
-      toast.present();
-      await aguarde.dismiss();
+    const toast = await this.toastCtrl.create({
+      message: 'Login/senha inválidos.',
+      duration: 2000
     });
-  }
+    toast.present();
+    await aguarde.dismiss();
 
+  });
+}
+  
 }

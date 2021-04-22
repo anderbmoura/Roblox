@@ -24,12 +24,12 @@
           </ion-fab-list>
         </ion-fab>
 
-    <ion-card>
+    <ion-card *ngFor="let dados of participateCard">
 
-        <img id="cardSorteioBau" src="https://http2.mlstatic.com/D_NQ_NP_237321-MLB20762249379_062016-O.jpg">
+        <img id="cardSorteioBau" src="{{dados.background}}">
     
         <ion-card-content>
-          <p>Sorteio de 650RP todo domingo.</p>
+          <p>{{dados.descricao}}</p>
         </ion-card-content>
     
         <div class="ion-text-center"> <p id="npart" class="texto"></p> </div>
@@ -41,90 +41,12 @@
         <ion-row>
           <ion-col align-self-center text-center>
             <ion-note>
-              LEAGUE OF LEGENDS
+              {{dados.jogo}}
             </ion-note>
             <br>
             <div class="participoubau"></div>
           </ion-col>
         </ion-row>
       </ion-card>
-
-      <ion-card>
-
-        <img id="cardSorteioBau" src="https://imagens.canaltech.com.br/empresas/638.400.jpg">
-    
-        <ion-card-content>
-          <p>Sorteio instagram, dia 10/03, regras se encontram no @skins_leagueoflegends. Boa sorte</p>
-        </ion-card-content>
-    
-        <div class="ion-text-center"> <p id="npart" class="texto"></p> </div>
-            <ion-button expand="block" icon-start (click)="ParticiparSkin">
-                <ion-icon name="videocam"></ion-icon>
-            <ion-label>Participar</ion-label>
-            </ion-button>
-    
-        <ion-row>
-          <ion-col align-self-center text-center>
-            <ion-note>
-              SORTEIO INSTAGRAM
-            </ion-note>
-            <br>
-            <div class="participoubau"></div>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-
-<!-- 
-      <ion-card>
-
-        <img id="cardSorteioSkin" src="">
-    
-        <ion-card-content>
-          <p id="descricaoSkin"></p>
-        </ion-card-content>
-    
-        <div class="ion-text-center"> <p id="npart" class="texto"></p> </div>
-    
-            <ion-button expand="block" icon-start (click)="ParticiparSkin()">
-                <ion-icon name="videocam"></ion-icon>
-              <ion-label>Participar</ion-label>
-            </ion-button>
-    
-        <ion-row>
-          <ion-col align-self-center text-center>
-            <ion-note>
-              LEAGUE OF LEGENDS
-            </ion-note>
-            <br>
-            <div class="participouskinlol"></div>
-          </ion-col>
-        </ion-row>
-      </ion-card> -->
-<!-- 
-      <ion-card>
-
-        <img id="cardSorteioPontos" src="">
-    
-        <ion-card-content>
-          <p id="descricaoPontos"></p>
-        </ion-card-content>
-    
-        <div class="ion-text-center"> <p id="npart" class="texto"></p> </div>
-    
-            <ion-button expand="block" icon-start (click)="ParticiparPontos()">
-                <ion-icon name="videocam"></ion-icon>
-              <ion-label>Participar</ion-label>
-            </ion-button>
-    
-        <ion-row>
-          <ion-col align-self-center text-center>
-            <ion-note>
-              LEAGUE OF LEGENDS
-            </ion-note>
-            <br>
-            <div class="participoupontos"></div>
-          </ion-col>
-        </ion-row>
-      </ion-card> -->
-
+      
 </ion-content>
