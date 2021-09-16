@@ -5,7 +5,7 @@ import Parse from 'parse';
 import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+//import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class Tab3Page implements OnInit {
     public alertController: AlertController,
     private httpClient: HttpClient,
     private http: Http,
-    private ga: GoogleAnalytics,
+  //  private ga: GoogleAnalytics,
     public actionSheetController: ActionSheetController) {
 
 
@@ -34,13 +34,13 @@ export class Tab3Page implements OnInit {
 
     this.nomeUser();
     // this.desenhaIcone();
-    this.ga.trackView('List Page')
-      .then(() => { })
-      .catch(e => console.log(e));
+    // this.ga.trackView('List Page')
+    //   .then(() => { })
+    //   .catch(e => console.log(e));
   }
 
   trackEvent(item) {
-    this.ga.trackEvent('Category', 'Tapped Action', 'Item Tapped is ' + item, 0);
+  //  this.ga.trackEvent('Category', 'Tapped Action', 'Item Tapped is ' + item, 0);
   }
 
 

@@ -24,19 +24,23 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+import { LoadingModelComponent } from './components/loading-model/loading-model.component';
+
+
 
 
 @NgModule({
   
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule, 
      DuvidasPageModule, HttpModule, HttpClientModule, CacheModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,
     InAppBrowser,
     AdMobFree,
+    LoadingModelComponent,
     AdmobFreeService,
     SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

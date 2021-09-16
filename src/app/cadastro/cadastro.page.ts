@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform, ToastController, NavController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
+import { LoadingModelComponent } from '../components/loading-model/loading-model.component';
+
 //firebase import
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -21,7 +23,8 @@ export class CadastroPage implements OnInit {
 
   constructor(public platform: Platform, public toastCtrl: ToastController, private navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    private load: LoadingModelComponent) {
   }
 
   ngOnInit() {
@@ -30,6 +33,8 @@ export class CadastroPage implements OnInit {
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       robloxName: new FormControl(null, [Validators.required])
     })
+
+   
 
   }
 
@@ -42,6 +47,8 @@ export class CadastroPage implements OnInit {
 
   signUp() {
 
+
+    this.load.loadPresent()
 
     firebase.auth().createUserWithEmailAndPassword(this.signupForm.get("email").value, this.signupForm.get("password").value).then(async (userCredential) => {
    
@@ -69,6 +76,7 @@ export class CadastroPage implements OnInit {
 
 
     }).catch((error) => {
+      this.load.loadHide()
       console.log(error)
     })
     

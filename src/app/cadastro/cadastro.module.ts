@@ -10,6 +10,7 @@ import { CadastroPage } from './cadastro.page';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+
 const routes: Routes = [
   {
     path: '',

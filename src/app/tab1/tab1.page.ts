@@ -18,6 +18,7 @@ import 'firebase/database';
 export class Tab1Page implements OnInit {
 
   public cardLOL = [];
+  teste = 1
 
    constructor(
     private navCtrl: NavController
@@ -43,7 +44,15 @@ export class Tab1Page implements OnInit {
 
 
 
-  goLeague() {
+  isValid(){
+    if (this.teste == 0) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+    goLeague() {
     this.navCtrl.navigateForward('/league')
   }
 
