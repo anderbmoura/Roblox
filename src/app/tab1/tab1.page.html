@@ -1,3 +1,9 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
 <ion-header>
   <ion-toolbar color="dark">
     <ion-title align="center">
@@ -7,13 +13,26 @@
 </ion-header>
 
 <ion-content color="dark" class="card-background-page">
+  <div *ngIf="cardLOL">
 
-  <ion-card (click)="goLeague()" *ngFor="let dados of cardLOL">
+  <ion-card class="animate__animated animate__fadeIn" (click)="goLeague()" *ngFor="let dados of cardLOL">
     <img src="{{dados.background}}"/>
     <div class="card-title">{{dados.Title}}</div>
     <div class="card-subtitle">{{dados.SubTitle}}</div>
   </ion-card>
 
-  <ion-button [disabled]="isValid()"> OI</ion-button>
+</div>
+
+<div *ngIf="!cardLOL">
+
+  <div class="ion-padding custom-skeleton">
+   
+      <ion-skeleton-text  animated style="width: 100%; height: 200px;"></ion-skeleton-text>
+      <ion-skeleton-text  animated style="width: 100%; height: 200px;"></ion-skeleton-text>
+  </div>
+
+</div>
+
+  <ion-button (click)="isValid()"> sair</ion-button>
 
 </ion-content>

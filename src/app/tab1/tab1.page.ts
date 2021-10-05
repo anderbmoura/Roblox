@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 //firebase SDK import
 
@@ -10,6 +10,7 @@ import "firebase/analytics";
 import 'firebase/database';
 
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -17,39 +18,54 @@ import 'firebase/database';
 })
 export class Tab1Page implements OnInit {
 
-  public cardLOL = [];
+  public cardLOL: any;
   teste = 1
 
    constructor(
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router,
+  
   ) {
 
   }
 
+
   ngOnInit() {
 
-    firebase.analytics().logEvent('seleção sorteio');
+    setTimeout(() => { 
 
-    var ref = firebase.database().ref('/mountCard')
+      firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        firebase.analytics().logEvent('seleção sorteio');
 
-    ref.once('value').then(async snapshot =>{
-       snapshot.forEach(value => {
-       this.cardLOL.push(
-         value.val()
-         )
-      })
+        var ref = firebase.database().ref('/mountCard')
+        this.cardLOL = []
+    
+        ref.once('value').then(async snapshot =>{
+           snapshot.forEach(value => {
+           this.cardLOL.push(
+             value.val()
+             )
+          })
+        })
+      } else {
+        this.router.navigate(['/login']);
+      }
     })
+
+     }, 3000);
 
   }
 
 
 
   isValid(){
-    if (this.teste == 0) {
-      return false
-    } else {
-      return true
-    }
+    firebase.auth().signOut().then(res => {
+      console.log(res)
+      this.navCtrl.navigateForward('/login')
+    }).catch((error) => {
+      console.log(error)
+    });
   }
 
     goLeague() {

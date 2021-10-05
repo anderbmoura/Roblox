@@ -51,21 +51,23 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      if (this.platform.is('cordova')) {
-        this.setupPush();
-      }
+      // if (this.platform.is('cordova')) {
+      //   this.setupPush();
+      // }
 
+      firebase.auth().onAuthStateChanged((user) => {
+
+        if (user) {
+          console.log(user)
+          this.router.navigate(['/tabs/tab1']);
+        }
+      })
     });
 
-    
-    firebase.auth().onAuthStateChanged(function(user) {
 
-      if (user) {
-        this.router.navigateByUrl('/tabs/tab1');
-      } else {
-        this.router.navigateByUrl('/login');
-      }
-    })
+
+    
+
 
   }
 
