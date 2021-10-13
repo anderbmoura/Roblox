@@ -2,7 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Parse } from 'parse';
 import { HttpClient } from '@angular/common/http';
 
-import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+
+//firebase SDK import
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import 'firebase/database';
+
+
+//import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 
 @Component({
@@ -19,7 +28,7 @@ export class Tab2Page implements OnInit {
   constructor(
 
     private http: HttpClient,
-    private ga: GoogleAnalytics
+   // private ga: GoogleAnalytics
 
   ) {
 
@@ -28,37 +37,65 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.vencedoresLOL();
-    this.ga.trackView('List Page')
-    .then(() => {})
-    .catch(e => console.log(e));
+    // this.ga.trackView('List Page')
+    // .then(() => {})
+    // .catch(e => console.log(e));
   }
 
-  trackEvent(item) {
-    this.ga.trackEvent('Category', 'Tapped Action', 'Item Tapped is '+item, 0);
-  }
+  // trackEvent(item) {
+  //   this.ga.trackEvent('Category', 'Tapped Action', 'Item Tapped is '+item, 0);
+  // }
   async vencedoresLOL() {
 
-    const winners = Parse.Object.extend('winners');
-    const query = new Parse.Query(winners);
-    query.equalTo("jogo", "LOL");
-    const result = await query.find();
+    var montaVencedores = []
 
-    for (const item of result) {
+      firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        firebase.analytics().logEvent('seleção sorteio');
 
-      this.vencedoresList.push({
+        var ref = firebase.database().ref('/winner')
 
-        nomeLOL: item.attributes.nome,
-        venceuEm: item.createdAt,
-        status: item.attributes.pago,
-        color: item.attributes.color,
-        premio: item.attributes.premio
-      })
-    }
-    ;
+    
+        ref.once('value').then(async snapshot =>{
+            snapshot.forEach(value => {
+            montaVencedores.push(
+                value.val()
+           )
+          })
+          for(let vencedores of montaVencedores){
+            console.log(vencedores)
+            for(let i = 0; i < vencedores.length; i++){
+            await  this.vencedoresList.push({
+                  color:      vencedores[i].color,
+                  robloxname: vencedores[i].robloxName,
+                  status:     vencedores[i].status,
+                  premio:     vencedores[i].premio
+            })
+          }
+         }
+        })
+      }
+    })
+
+
+    console.log(this.vencedoresList)
+
   }
 
-  //   async vencedoresCS() {
+  doRefresh(event){
+    console.log(event)
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+  
+
+  //   async vencedoresCS() {
+    // color:      value.val().color,
+    // robloxname: value.val().robloxname,
+    // status:     value.val().status
 
   //     const winners = Parse.Object.extend('winners');
   //     const query = new Parse.Query(winners);

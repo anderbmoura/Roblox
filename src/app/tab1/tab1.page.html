@@ -15,12 +15,11 @@
 <ion-content color="dark" class="card-background-page">
   <div *ngIf="cardLOL">
 
-  <ion-card class="animate__animated animate__fadeIn" (click)="goLeague()" *ngFor="let dados of cardLOL">
+  <ion-card class="animate__animated animate__fadeIn" (click)="goSorteio(i)" *ngFor="let dados of cardLOL; let i = index">
     <img src="{{dados.background}}"/>
     <div class="card-title">{{dados.Title}}</div>
     <div class="card-subtitle">{{dados.SubTitle}}</div>
   </ion-card>
-
 </div>
 
 <div *ngIf="!cardLOL">

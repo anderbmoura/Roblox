@@ -1,7 +1,7 @@
 import { AdmobFreeService } from '../../service/admobfree.service';
 import { Parse } from 'parse';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ToastController, NavController } from '@ionic/angular';
 
 
@@ -11,6 +11,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/analytics";
 import 'firebase/database';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-league',
@@ -18,6 +19,8 @@ import 'firebase/database';
   styleUrls: ['./league.page.scss'],
 })
 export class LeaguePage implements OnInit {
+
+  tipoSorteio: string
 
 
   public participateCard = [];
@@ -30,23 +33,30 @@ export class LeaguePage implements OnInit {
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     private navCtrl: NavController,
+    public router: Router,
     private socialSharing: SocialSharing
   ) {
 
+    if (router.getCurrentNavigation().extras.state) {
+      const getSorteio = this.router.getCurrentNavigation().extras.state.sorteio;
+      this.tipoSorteio = getSorteio
+    }
+    
+    console.log(this.tipoSorteio)
   }
 
   ngOnInit() {
 
-    var ref = firebase.database().ref('/mountParticipateCard')
+    // var ref = firebase.database().ref('/mountParticipateCard')
 
-    ref.once('value').then(async snapshot =>{
-       snapshot.forEach(value => {
-       this.participateCard.push(
-         value.val()
+    // ref.once('value').then(async snapshot =>{
+    //    await snapshot.forEach(value => {
          
-         )
-      })
-    })
+    //    this.participateCard.push(
+    //      value.val()
+    //    )
+    //   })
+    // })
 
   }
 
@@ -59,6 +69,7 @@ export class LeaguePage implements OnInit {
 
   ionViewWillEnter() {
     this.admobFreeService.BannerAd();
+    console.log(this.tipoSorteio)
     //this.badgePartipou();
     //this.badgePartipouSkinLol();
   }

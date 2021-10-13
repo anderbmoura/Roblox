@@ -21,7 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../raspadinha/raspadinha.module#RaspadinhaPageModule'
+            loadChildren: '../tab2/tab2.module#Tab2PageModule'
           }
         ]
       },

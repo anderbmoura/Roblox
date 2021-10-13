@@ -15,4 +15,27 @@
 
 p{
   white-space: pre-wrap !important;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.nomeStyle {
+  margin-top: 7px;
+  font-size: 16px;
+}
+
+ion-label {
+  align-items: center;
+  align-content: center;
+}
+
+ion-chip {
+  width: 120px;
+  text-align: center;
+  display: flow-root;
+  font-weight: bold;
+}
+
+.status {
+  text-align: center;
 }

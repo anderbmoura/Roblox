@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -17,6 +17,8 @@ import 'firebase/database';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
+
+  @Output() tipoSorteio: string
 
   public cardLOL: any;
   teste = 1
@@ -68,8 +70,16 @@ export class Tab1Page implements OnInit {
     });
   }
 
-    goLeague() {
-    this.navCtrl.navigateForward('/league')
+    goSorteio(index) {
+  
+      if(index == 0){
+        this.tipoSorteio = 'diario'
+      } else {
+        this.tipoSorteio = 'mensal'
+      }
+    this.navCtrl.navigateForward('/league', {state: {
+      sorteio: this.tipoSorteio
+    }})
   }
 
 }
