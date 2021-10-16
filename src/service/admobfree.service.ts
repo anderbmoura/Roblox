@@ -113,14 +113,12 @@ export class AdmobFreeService implements OnInit {
 
                 var seconds = new Date()
                 var data = new Date()
-                var dia = data.getDate()
-                var mes = data.getMonth()
 
                 firebase.database().ref('/participate/'+randomstring+user.uid).set({
                   game: 'roblox',
                   participateTime: ((seconds.getHours()*3600000)+3600000)+(seconds.getMinutes()*60000),
                   robloxName: snapshot.val().robloxName,
-                  date: dia+'/'+mes,
+                  date: data,
                   type: 1,
                   uid: user.uid
                 })

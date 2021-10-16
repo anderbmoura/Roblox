@@ -10,10 +10,6 @@
 <ion-content color="dark">
   <br>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content>
-aaaa
-    </ion-refresher-content>
     <ion-item color="dark" *ngFor="let vencedores of vencedoresList">
       <ion-avatar slot="start">
         <img id="avatarListWins" src="../../assets/imgs/medalha.png">
@@ -28,6 +24,6 @@ aaaa
         </ion-label>
       </ion-chip>
     </ion-item>
-  </ion-refresher>
+
 
 </ion-content>

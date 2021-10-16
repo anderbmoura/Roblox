@@ -206,7 +206,7 @@ export class LeaguePage implements OnInit {
 
   async shareWhats() {
     // Text + Image or URL works
-    this.socialSharing.shareViaWhatsApp('Estou te convidando a conhecer o Skins, um aplicativo que sorteia skins de League of Legends. Baixe agora!', null, this.url).then(() => {
+    this.socialSharing.shareViaWhatsApp('Venha participar comigo no sorteio de 70 ROBUX, todo dia tem um ganhador.', null, this.url).then(() => {
 
     }).catch((e) => {
       // Error!
