@@ -6,6 +6,7 @@ import {
   AdMobFreeRewardVideoConfig
 } from '@ionic-native/admob-free/ngx';
 import { Platform, ToastController, AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 //firebase import
 import firebase from "firebase/app";
@@ -15,7 +16,10 @@ import 'firebase/database';
 import { random } from "lodash";
 
 
-@Injectable()
+
+@Injectable({
+  providedIn: 'root',
+})
 export class AdmobFreeService implements OnInit {
 
   argumentos = null;
@@ -32,21 +36,21 @@ export class AdmobFreeService implements OnInit {
 
   //Reward Video Ad's Configurations
   RewardVideoConfig: AdMobFreeRewardVideoConfig = {
-    isTesting: true, // Remove in production
-    autoShow: false//
-    //id: "ca-app-pub-4960570157635148/2568229534"
+    isTesting: false, // Remove in production
+    autoShow: false,
+    id: "ca-app-pub-4960570157635148/7079885498"
   };
 
   invocador: String;
-  jogoPar: any;
-  tipo: any;
+  //tipo: any;
   counter: any;
 
   constructor(
     private admobFree: AdMobFree,
     public platform: Platform,
     public toastCtrl: ToastController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private storage: Storage
   ) {
 
 
@@ -99,6 +103,17 @@ export class AdmobFreeService implements OnInit {
             var rnum = Math.floor(Math.random() * chars.length);
             randomstring += chars.substring(rnum, rnum + 1);
           }
+
+          let valorStorage
+
+        await  this.storage.get('name').then((val) => {
+            valorStorage = val
+            console.log(val)
+          });
+
+          console.log(valorStorage)
+
+          if ( valorStorage == 'diario'){
           
 
           firebase.auth().onAuthStateChanged(function(user) {
@@ -113,20 +128,18 @@ export class AdmobFreeService implements OnInit {
 
                 var seconds = new Date()
                 var data = new Date()
-                var dia = data.getDate()
-                var mes = data.getMonth()
+
 
                 firebase.database().ref('/participate/'+randomstring+user.uid).set({
                   game: 'roblox',
-                  participateTime: ((seconds.getHours()*3600000)+3600000)+(seconds.getMinutes()*60000),
+                  identificacao: 'diario',
                   robloxName: snapshot.val().robloxName,
-                  date: dia+'/'+mes,
+                  date: data,
                   type: 1,
                   uid: user.uid
                 })
 
-                firebase.database().ref('/participateTime/'+user.uid).set({
-                  participateTime: ((seconds.getHours()*3600000)+3600000)+(seconds.getMinutes()*60000),
+                firebase.database().ref('/participateDaily/'+user.uid).set({
                   id: user.uid
                 })
 
@@ -138,12 +151,54 @@ export class AdmobFreeService implements OnInit {
               // No user is signed in.
             }
           });
+        } else {
+
+          
+          firebase.auth().onAuthStateChanged(function(user) {
+
+            if (user) {
+
+              var username = firebase.database().ref('/users/' + user.uid)
+
+              username.on('value', (snapshot) =>{
+
+                console.log(user)
+
+                var seconds = new Date()
+                var data = new Date()
+
+
+                firebase.database().ref('/participate/'+randomstring+user.uid).set({
+                  game: 'roblox',
+                  identificacao: 'mensal',
+                  robloxName: snapshot.val().robloxName,
+                  date: data,
+                  type: 2,
+                  uid: user.uid
+                })
+
+                firebase.database().ref('/participateMounth/'+user.uid).push({
+                  id: user.uid,
+                  data: data.getDate()
+                })
+
+                toast.present()
+                
+              })
+
+            } else {
+              // No user is signed in.
+            }
+          });
+
+
+        }
         }).catch(e => alert(e));
     });
   }
 
   ngOnInit() {
-
+      
   }
 
   
@@ -152,7 +207,7 @@ export class AdmobFreeService implements OnInit {
     let bannerConfig: AdMobFreeBannerConfig = {
       isTesting: false, // Remove in production
       autoShow: true,//,
-      id: "ca-app-pub-4960570157635148/1059209304"
+      id: "ca-app-pub-4960570157635148/2100673943"
     };
     this.admobFree.banner.config(bannerConfig);
 
@@ -189,10 +244,10 @@ export class AdmobFreeService implements OnInit {
       .catch(e => alert("isReady " + e));
   }
 
-  passaJogoParamentro(jogo: String, tipo: String) {
-    this.jogoPar = jogo;
-    this.tipo = tipo;
-  }
+  // passaJogoParamentro(ident: String, tipo: String) {
+  //   this.jogoPar = ident;
+  //   this.tipo = tipo;
+  // }
 
 
 }

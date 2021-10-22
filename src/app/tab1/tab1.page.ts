@@ -1,6 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { Platform } from '@ionic/angular';
 
 //firebase SDK import
 
@@ -18,15 +20,48 @@ import 'firebase/database';
 })
 export class Tab1Page implements OnInit {
 
+  @Output() tipoSorteio: string
+
   public cardLOL: any;
   teste = 1
+  pushes: any = [];
 
    constructor(
     private navCtrl: NavController,
     private router: Router,
-  
+    private fcm: FCM,
+    public plt: Platform
   ) {
 
+    this.plt.ready()
+    .then(() => {
+      this.fcm.onNotification().subscribe(data => {
+        if (data.wasTapped) {
+          console.log("Received in background");
+        } else {
+          console.log("Received in foreground");
+        };
+      });
+
+      this.fcm.onTokenRefresh().subscribe(token => {
+        // Register your new token in your back-end if you want
+        // backend.registerToken(token);
+      });
+    })
+
+  }
+
+  subscribeToTopic() {
+    this.fcm.subscribeToTopic('enappd');
+  }
+  getToken() {
+    this.fcm.getToken().then(token => {
+      // Register your new token in your back-end if you want
+      // backend.registerToken(token);
+    });
+  }
+  unsubscribeFromTopic() {
+    this.fcm.unsubscribeFromTopic('enappd');
   }
 
 
@@ -57,19 +92,16 @@ export class Tab1Page implements OnInit {
 
   }
 
-
-
-  isValid(){
-    firebase.auth().signOut().then(res => {
-      console.log(res)
-      this.navCtrl.navigateForward('/login')
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
-
-    goLeague() {
-    this.navCtrl.navigateForward('/league')
+    goSorteio(index) {
+  
+      if(index == 0){
+        this.tipoSorteio = 'diario'
+      } else {
+        this.tipoSorteio = 'mensal'
+      }
+    this.navCtrl.navigateForward('/league', {state: {
+      sorteio: this.tipoSorteio
+    }})
   }
 
 }

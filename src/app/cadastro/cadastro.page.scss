@@ -4,13 +4,16 @@ page-login {
 }
 
 ion-button{
-  display: block;
+
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  margin-top: 20px;
+  margin-top: 10px;
   text-transform: none;
   --border-radius: 20px;
   font-size: 15px;
-  height: 30px;
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 
 }
 

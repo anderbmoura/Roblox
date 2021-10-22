@@ -48,13 +48,7 @@ export class CounterstrikePage implements OnInit {
 
 }
 
-  showRewardVideo(){
-    this.admobFreeService.RewardVideoAd();
-  }
 
-  passaParamentro(jogoo: String, tipoo: String){
-    this.admobFreeService.passaJogoParamentro(jogoo, tipoo);
-  }
 
 
   async ParticiparcsChave(){
@@ -118,8 +112,7 @@ export class CounterstrikePage implements OnInit {
   } else {
 
   aguarde.dismiss();
-  this.showRewardVideo();
-  this.passaParamentro('CS', '1');
+ 
   }
 
 }, (error) => {
@@ -189,9 +182,7 @@ export class CounterstrikePage implements OnInit {
     opsParticipou.present()
   } else {
 
-  aguarde.dismiss();
-  this.showRewardVideo();
-  this.passaParamentro('CS', '2');
+
   }
 
 }, (error) => {

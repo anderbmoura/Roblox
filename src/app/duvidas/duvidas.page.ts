@@ -16,11 +16,12 @@ export class DuvidasPage implements OnInit {
   ) { 
 
     this.items = [
-      { expanded: false, title: "Sorteios", response: "O sorteio será realizado através do próprio sistema integrado do aplicativo, ao clicar no botão participar, o seu nome será encaminhado para o banco de dados. Acontecerá 1 sorteio por semana, cada participante poderá participar uma vez por dia do sorteios disponíveis. O ganhador será notificado via app por sistema de push. O ganhador deverá entrar em contato conosco no instagram @skins_leagueoflegends em até 24h, após esse período na ausência de contato, o prêmio será cancelado."},
-      { expanded: false, title: "Recebimento do prêmio", response: "Após ser divulgado o vencedor o mesmo deverá entrar em contato no instagram @skins_leagueoflegends no prazo de 24 horas, caso o mesmo não realize o contato o prêmio será cancelado." },
-      { expanded: false, title: "Baú aleatório", response: "Adicionaremos o ganhador em nossa conta pessoal no jogo e enviaremos o prêmio em forma de presente ou voucher" },
-      { expanded: false, title: "Sorteios por semana", response: "No começo do skins iremos sortear apenas 650 RP por semana, conforme o app for crescendo e tenhamos mais usuários certamente aumentaremos o número de sorteios semanais para que fique melhor para todos." },
-      { expanded: false, title: "Entre em contato", response: "@skins_leagueoflegends no instagram" }
+      { expanded: false, title: "Sorteios", response: "O sorteio de 50 Robux é realizado diariamente com divulgação do vencedor as 22h do mesmo dia. Enquanto o sorteio mensal é realizado todo final do mês as 22h."},
+      { expanded: false, title: "Recebimento do prêmio", response: "Após ser divulgado o vencedor o mesmo deverá entrar em contato no instagram @sorteiagames ou através do grupo no roblox chamado My roblox 4ever. Também é possível adicionar o usuário sorteiagames games no jogo e chama-lo no chat" },
+      { expanded: false, title: "Grupo Roblox", response: "Para receber o prêmio é preciso estar em nosso grupo do roblox chamado My roblox 4ever" },
+      { expanded: false, title: "Mudei meu @", response: "Se você alterou seu @ antes de receber o prêmio, o mesmo não será entregue." },
+      { expanded: false, title: "Entre em contato", response: "@sorteiagames no instagram, @sorteiagames no Roblox ou contato.sorteiagames@gmail.com" }
+      
     ];
 
   }

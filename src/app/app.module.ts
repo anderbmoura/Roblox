@@ -26,6 +26,9 @@ import { environment } from '../environments/environment';
 
 import { LoadingModelComponent } from './components/loading-model/loading-model.component';
 
+import { FCM } from '@ionic-native/fcm/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 
 
@@ -33,13 +36,14 @@ import { LoadingModelComponent } from './components/loading-model/loading-model.
   
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule, 
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule, IonicStorageModule.forRoot(), 
      DuvidasPageModule, HttpModule, HttpClientModule, CacheModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,
     InAppBrowser,
     AdMobFree,
+    FCM,
     LoadingModelComponent,
     AdmobFreeService,
     SocialSharing,
