@@ -22,8 +22,6 @@ import 'firebase/database';
 export class Tab2Page implements OnInit {
 
   public vencedoresList: any = [];
-  public vencedoresListCS: any = [];
-  public vencedoresListDOTA: any = [];
 
   constructor(
 

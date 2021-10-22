@@ -4,7 +4,7 @@
           <ion-back-button text='' icon="arrow-dropleft" defaultHref="/"></ion-back-button>
         </ion-buttons>
 
-    <ion-title>LOL</ion-title>
+    <ion-title>Sorteio de ROBUX</ion-title>
 
     <ion-buttons slot="primary">
       </ion-buttons>
@@ -31,11 +31,11 @@
         <img id="cardSorteioBau" src="https://store-images.s-microsoft.com/image/apps.14594.65391496338792539.9dfde316-9e5e-496d-8491-e4e5e3b6c541.017066f1-6106-45dc-aa28-8577cbbda5c5?mode=scale&q=90&h=720&w=1280&format=jpg" >
   
         <ion-card-content >
-          <p>Participe do sorteio diário de <b>70 ROBUX</b>. O vencedor é anunciado todos os dias as 22h horário de Brasília. Não deixe de conferir a aba de vencedores no app.</p>
+          <p>Participe do sorteio diário de <b>50 ROBUX</b>. O vencedor é anunciado todos os dias as 22h horário de Brasília. Não deixe de conferir a aba de vencedores no app.</p>
         </ion-card-content>
     
         <div class="ion-text-center"> <p id="npart" class="texto"></p> </div>
-            <ion-button expand="block" icon-start (click)="ParticiparBau()" >
+            <ion-button [disabled]="enableButton" expand="block" icon-start (click)="Participar()"  >
                 <ion-icon name="videocam"></ion-icon>
             <ion-label>Participar do sorteio diário</ion-label>
             </ion-button>
@@ -61,9 +61,9 @@
         </ion-card-content>
     
         <div class="ion-text-center"> <p id="npart" class="texto"></p> </div>
-            <ion-button expand="block" icon-start (click)="ParticiparBau()" >
+            <ion-button [disabled]="enableButton" expand="block" icon-start (click)="Participar()" >
                 <ion-icon name="videocam"></ion-icon>
-            <ion-label>Participar</ion-label>
+            <ion-label>Participar do sorteio mensal</ion-label>
             </ion-button>
     
         <ion-row>

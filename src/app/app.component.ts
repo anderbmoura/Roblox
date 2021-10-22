@@ -11,6 +11,7 @@ import "firebase/auth";
 import "firebase/database";
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -28,6 +29,10 @@ export class AppComponent {
     measurementId: "G-HZ30MRXKTK"
   }
 
+
+
+
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -36,7 +41,6 @@ export class AppComponent {
     private oneSignal: OneSignal,
     private alertCtrl: AlertController
   ) {
-
 
     this.initializeApp();
 

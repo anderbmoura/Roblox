@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "285973272671",
-    "firebase_url": "https://skins-235bc.firebaseio.com",
-    "project_id": "skins-235bc",
-    "storage_bucket": "skins-235bc.appspot.com"
+    "project_number": "786959345698",
+    "firebase_url": "https://roblox-4-ever-default-rtdb.firebaseio.com",
+    "project_id": "roblox-4-ever",
+    "storage_bucket": "roblox-4-ever.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:285973272671:android:105d24a7df25ea17",
+        "mobilesdk_app_id": "1:786959345698:android:a5ddd198380697c535427b",
         "android_client_info": {
-          "package_name": "com.skins.news"
+          "package_name": "com.sorteiagames.forever"
         }
       },
       "oauth_client": [
         {
-          "client_id": "285973272671-3n5qk69rioc8p0kif5hs3c5siule5mb8.apps.googleusercontent.com",
+          "client_id": "786959345698-0o2ctatmhgivr0kmr9hqgo5abhd9j6u6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCeTd32hVsyO66uEG46-sBqQZkw2SbIeEU"
+          "current_key": "AIzaSyDWOebQER-iJv7EZffHkRVYP6FUXHup9zk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "285973272671-3n5qk69rioc8p0kif5hs3c5siule5mb8.apps.googleusercontent.com",
+              "client_id": "786959345698-0o2ctatmhgivr0kmr9hqgo5abhd9j6u6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

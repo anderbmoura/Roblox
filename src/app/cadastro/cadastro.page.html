@@ -15,7 +15,7 @@
 
   <ion-item color="dark">
     <ion-icon name="cube"></ion-icon>
-    <ion-input formControlName="robloxName" placeholder="Nome no Roblox"></ion-input>
+    <ion-input formControlName="robloxName" placeholder="Seu @ no Roblox"></ion-input>
   </ion-item>
 
   <ion-item color="dark">
@@ -35,10 +35,10 @@
           <ion-label position="floating">Código de indicação (opcional)</ion-label>
           <ion-input [(ngModel)]="codigo"></ion-input>
         </ion-item> -->
-  <ion-footer>
-    <ion-toolbar color="dark">
+
+ 
+  
       <ion-button [disabled]="!signupForm.valid" color="primary" expand="full" size="large" (click)="signUp()">CADASTRAR</ion-button>
-    </ion-toolbar>
-  </ion-footer>
+
 
 </ion-content>

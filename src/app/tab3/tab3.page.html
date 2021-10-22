@@ -12,26 +12,22 @@
   <ion-item color="dark">
 
     <ion-thumbnail slot="start">
-        <input (change)="avatarSend()"
+        <!-- <input (change)="avatarSend()"
         type="file"
         id="avatarImg" name="avatarImg"
         class="fileInput"
-        accept="image/png"/>
-        <label for="avatarImg"><img id="avatarImgg" src=""></label>
+        accept="image/png"/> -->
+        <label for="avatarImg"><img src="../../assets/imgs/medalha.png"></label>
     </ion-thumbnail>
 
-    <ion-label id="nomeUser" class="nomeStyle"></ion-label>
-    <ion-button (click)="updateInvocator()" fill="clear" color="light">Alterar</ion-button>
+    <ion-label class="nomeStyle"> @<b>{{usuario}}</b> </ion-label>
+    <ion-button (click)="updateUserRoblox()" fill="clear" color="light">Alterar</ion-button>
   </ion-item>
 
   
 <!-- 
     <label id="saldoPonto">Saldo de pontos: <label id="pontos"></label></label> -->
   
-
-
-
-<br>
 <br>
 <br>
  
@@ -62,14 +58,14 @@
         <ion-icon name="laptop" slot="start"></ion-icon>
         Partida atual (In-Game)
     </ion-item> -->
-    <ion-item (click)="historico()" color="dark">
+    <!-- <ion-item (click)="historico()" color="dark">
       <ion-icon name="list" slot="start"></ion-icon>
       Histórico de partidas
-  </ion-item>
-  <ion-item (click)="vencedores()" color="dark">
+  </ion-item> -->
+  <!-- <ion-item (click)="vencedores()" color="dark">
     <ion-icon name="md-ribbon" slot="start"></ion-icon>
     Últimos Vencedores
-</ion-item>
+</ion-item> -->
         <ion-item (click)="presentModal()" color="dark">
             <ion-icon name="chatboxes" slot="start"></ion-icon>
             Duvidas

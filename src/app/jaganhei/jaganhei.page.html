@@ -18,14 +18,14 @@
 
   <ion-item color="dark" *ngFor="let vencedores of vencedoresInd">
     <ion-avatar slot="start">
-      <img src="../../assets/imgs/{{vencedores.imagem}}">
+      <img src="../../assets/imgs/medalha.png">
     </ion-avatar>
     <ion-label class="nomeStyle">
-      <b>{{vencedores.jogo}}</b> - {{vencedores.nome}}
+      {{vencedores.robloxName}} - {{vencedores.premio}}
       <br>
     </ion-label>
     <ion-label id="dataGanhou">
-      {{vencedores.dataDia}}/{{vencedores.dataMes}}/{{vencedores.dataAno}}
+      {{vencedores.data}}
     </ion-label>
   </ion-item>
 </ion-content>

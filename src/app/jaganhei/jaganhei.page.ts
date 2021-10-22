@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import Parse from 'parse';
 
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import 'firebase/database';
+
 @Component({
   selector: 'app-jaganhei',
   templateUrl: './jaganhei.page.html',
@@ -20,56 +25,45 @@ export class JaganheiPage implements OnInit {
 
   }
 
-  async jaGanhei() {
-
-    var idd: String;
-    idd = Parse.User.current().id;
-
-
-    const winners = Parse.Object.extend('winners');
-    const query = new Parse.Query(winners);
-    query.equalTo("iduser", idd);
-    query.descending("createdAt");
-    const result = await query.find();
-    query.find().then((results) => {
-
-      console.log(results[0]);
-      console.log("Sua utlima vitoria foi no jogo " + results[0].attributes.jogo + " no dia " + results[0].createdAt.getDate() + "/" + results[0].createdAt.getMonth() + "/" + results[0].createdAt.getFullYear());
-
-    }, (error) => {
-
-    });
-
-
-
-  }
 
   async vencedorPage() {
 
-    var iduser: String;
-    iduser = Parse.User.current().id;
+    const user = firebase.auth().currentUser;
 
+    if (user) {
 
+      var username = firebase.database().ref('/winner/'+user.uid)
+      username.once('value', async (snapshot) =>{
 
-    const winners = Parse.Object.extend('winners');
-    const query = new Parse.Query(winners);
-    query.equalTo("iduser", iduser);
-    query.descending("createdAt");
-    const result = await query.find();
+        console.log(user.uid)
 
-    for (const item of result) {
-      this.vencedoresInd.push({
-        nome: item.attributes.nome,
-        jogo: item.attributes.jogo,
-        dataDia: item.createdAt.getDate(),
-        dataMes: (item.createdAt.getMonth()) + 1,
-        dataAno: item.createdAt.getFullYear(),
-        imagem: item.attributes.thumnail
+        
+        snapshot.forEach(value => {
+          console.log(value.val())
+          this.vencedoresInd.push(
+              value.val()
+         )
+        })
 
-      })
+        console.log(this.vencedoresInd)
+
+        for(let vencedores of this.vencedoresInd){
+          console.log(vencedores)
+          for(let i = 0; i < vencedores.length; i++){
+          await  this.vencedoresInd.push({
+                color:      vencedores[i].color,
+                robloxname: vencedores[i].robloxName,
+                status:     vencedores[i].status,
+                premio:     vencedores[i].premio,
+                data:       vencedores[i].data
+          })
+        }
+       }
+
+      }
+    )}
     }
-    ;
   }
 
 
-}
+

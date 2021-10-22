@@ -1,8 +1,13 @@
 import { DuvidasPage } from './../duvidas/duvidas.page';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, ToastController, LoadingController, ModalController, AlertController, ActionSheetController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
-import { Http } from '@angular/http';
+
+//firebase SDK import
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/analytics";
+import 'firebase/database';
 
 //import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
@@ -16,28 +21,28 @@ import { Http } from '@angular/http';
 
 //   data: any;
 
+usuario: any
 
 
-//   constructor(public navCtrl: NavController, public toastCtrl: ToastController,
-//     public loadingCtrl: LoadingController, public modalController: ModalController,
-//     public alertController: AlertController,
-//     private httpClient: HttpClient,
-//     private http: Http,
-//   //  private ga: GoogleAnalytics,
-//     public actionSheetController: ActionSheetController) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController, public modalController: ModalController,
+    public alertController: AlertController,
+  //  private ga: GoogleAnalytics,
+    public actionSheetController: ActionSheetController) {
 
 
-//   }
+  }
 
   ngOnInit() {
 
-    //this.nomeUser();
+    this.nomeUser();
     // this.desenhaIcone();
     // this.ga.trackView('List Page')
     //   .then(() => { })
     //   .catch(e => console.log(e));
   }
 
+  
 //   trackEvent(item) {
 //   //  this.ga.trackEvent('Category', 'Tapped Action', 'Item Tapped is ' + item, 0);
 //   }
@@ -179,106 +184,43 @@ import { Http } from '@angular/http';
 
 
 
-//   async presentModal() {
-//     const modal = await this.modalController.create({
-//       component: DuvidasPage
-//     });
-//     return await modal.present();
-//   }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: DuvidasPage
+    });
+    return await modal.present();
+  }
 
 
 
-//   async logOut() {
-//     const aguarde = await this.loadingCtrl.create({
-//       spinner: "dots",
-//     });
+  logOut() {
+    firebase.auth().signOut().then(res => {
+      console.log(res)
+      this.navCtrl.navigateForward('/login')
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
 
-//     await aguarde.present();
+  nomeUser() {
 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        firebase.analytics().logEvent('seleção sorteio');
 
-//     Parse.User.logOut().then(async (resp) => {
-//       console.log('Logged out successfully', resp);
+        var ref = firebase.database().ref('/users/'+user.uid)
 
-//       // this.navCtrl.setRoot(LoginPage);
-//       await aguarde.dismiss();
-//       this.navCtrl.navigateRoot('/login')
+    
+        ref.once('value').then(async snapshot =>{
 
-
-
-//     }, async err => {
-
-//       const toast = await this.toastCtrl.create({
-//         message: 'Verifique a conexão com a internet',
-//         duration: 2000
-//       })
-//       await toast.present();
-//     })
-//   }
-
-//   nomeUser() {
-//     const User = new Parse.User();
-//     const query = new Parse.Query(User);
-
-//     var iduser: String;
-//     iduser = Parse.User.current().id;
-
-//     query.get(iduser).then((user) => {
-
-//       var pontos = user.attributes.pontos
-
-//       if (user.attributes.pontos == undefined) {
-//         pontos = 0
-//       } else {
-//         var pontos = user.attributes.pontos;
-//       }
-
-//       document.getElementById("nomeUser").innerHTML = "Bem vindo " + user.attributes.invocador;
-//       //document.getElementById("qtdPontos").innerHTML = pontos;
-//       (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Unranked.png" // icone unranked
-//       this.http.get('https://enable-cors.awesomeapi.com.br/api?u=https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/' + user.attributes.EncryptedID + '?api_key=RGAPI-9b06beb2-d9b0-4692-aa2c-1f154f282131').subscribe((response) => {
-
-//         var rank = response[0].tier
-
-//         if (rank == "IRON") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Iron.png"
-//         }
-//         else if (rank == "BRONZE") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Bronze.png"
-//         }
-//         else if (rank == "SILVER") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Silver.png"
-//         }
-//         else if (rank == "GOLD") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Gold.png"
-//         }
-//         else if (rank == "PLATINUM") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Platinum.png"
-//         }
-//         else if (rank == "DIAMOND") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Diamond.png"
-//         }
-//         else if (rank == "MASTER") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Master.png"
-//         }
-//         else if (rank == "GRANDMASTER") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Grandmaster.png"
-//         }
-//         else if (rank == "CHALLENGER") {
-//           (<HTMLInputElement>document.getElementById("avatarImgg")).src = "../../assets/ranked-emblems/Emblem_Challenger.png"
-//         }
-//         else {
-
-//         }
-
-//       });
-
-
-
-//     }, error => {
-
-
-//     });
-//   }
+          console.log(snapshot.val())
+          this.usuario = snapshot.val().robloxName
+            
+        })
+      }
+    })
+  
+    }
 
 //   async avatarSend() {
 
@@ -314,9 +256,9 @@ import { Http } from '@angular/http';
 //     this.navCtrl.navigateForward('/numerosdasorte')
 //   }
 
-//   jaGanheiPage() {
-//     this.navCtrl.navigateForward('/jaganhei')
-//   }
+  jaGanheiPage() {
+    this.navCtrl.navigateForward('/jaganhei')
+  }
 
 //   trocaPontos() {
 //     this.navCtrl.navigateForward('/trocapontos')
@@ -371,87 +313,57 @@ import { Http } from '@angular/http';
 //     await alert.present();
 //   }
 
-//   async updateInvocator() {
+  async updateUserRoblox() {
 
-//     const User = new Parse.User();
-//     const query = new Parse.Query(User);
-
-//     var iduser: String;
-//     iduser = Parse.User.current().id;
-
-//     // Finds the user by its ID
-//     query.get(iduser).then(async (user) => {
-
-//       const alert = await this.alertController.create({
-//         header: 'Atualização nome de invocador',
-//         subHeader: 'Por favor, digite corretamente seu nome de invocador, procure digitar exatamente como esta no League of Legends, com espaços e etc.',
-//         inputs: [
-//           {
-//             name: 'invocador',
-//             type: 'text',
-//             placeholder: 'SEU INVOCADOR'
-//           }
-//         ],
-//         buttons: [
-//           {
-//             text: 'Cancel',
-//             role: 'cancel',
-//             cssClass: 'secondary'
-//           },
-//           {
-//             text: 'Salvar',
-//             handler: (alertData) => {
-
-//               this.http.get('https://enable-cors.awesomeapi.com.br/api?u=https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + alertData.invocador + '?api_key=RGAPI-9b06beb2-d9b0-4692-aa2c-1f154f282131').subscribe(async (res) => {
-
-//                 const dados = JSON.parse((<any>res)._body)
-
-//                 await query.get(iduser).then((user) => {
-
-//                   user.set('EncryptedID', dados.id);
-//                   user.set('accountID', dados.accountId);
-//                   user.set('summonerLVL', dados.summonerLevel.toString());
-//                   user.set('invocador', alertData.invocador);
-
-//                   user.save().then((response) => {
-
-//                     this.updateWinners(alertData.invocador)
-//                     this.updateParticipate(alertData.invocador)
-//                     this.champSave()
-//                     this.nomeUser()
-
-//                   }).catch((error) => {
-
-//                     console.log(error)
-
-//                   });
-//                 });
-
-//               },
-//                 error => {
-//                   if (error.status == 404) {
-
-//                     this.presentAlert()
-
-//                   }
-//                 },
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Alterar nome',
+        inputs: [
+          {
+            name: 'robloxName',
+            type: 'text',
+            placeholder: 'Digite seu novo @'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          }, {
+            text: 'Ok',
+            handler: (value) => {
+              console.log(value.robloxName);
 
 
-//               )//fecha o subscribe
+              firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                  firebase.analytics().logEvent('seleção sorteio');
+          
+                  firebase.database().ref('/users/'+user.uid).set({
+                    robloxName: value.robloxName,
+                    uid: user.uid
+                  }).then(() => {
+                    this.nomeUser()
+                  })
+          
+                }
+              })
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    
 
 
-//             }
-//           }
-//         ],
-//         backdropDismiss: false
-//       });
 
-//       await alert.present();
-
-
-//     });
-
-//   }
+    
+  }
 
 //   async updateWinners(invocadorNome) {
 
